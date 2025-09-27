@@ -1,4 +1,7 @@
 #!/bin/bash -e
+# 所有输出同时写入 log.txt
+exec > >(tee -a log.txt)
+exec 2>&1
 # This file is used to build the Docker image
 # Examples:
 #./docker.sh
@@ -28,23 +31,6 @@ echo "Iconify API version: ${ICONIFY_API_VERSION}"
 
 mkdir -p $BUILD_SOURCE/tmp
 
-# If we need a different APT package list during the build, this will fetch it
-# This is useful in case a local APT cache is used.
-if [ -s $SHARED_DIR/sources-build.list ]; then
-    cp -f $SHARED_DIR/sources-build.list $BUILD_SOURCE/tmp/sources.list
-else
-    rm -f $BUILD_SOURCE/tmp/sources.list
-    touch $BUILD_SOURCE/tmp/sources.list
-fi
-
-# If we need an extra CA root cert during the build, this will fetch it
-# This is useful in case connections go through eg. a Squid proxy to cache npm packages.
-if [ -s $SHARED_DIR/build-ca-cert.crt ]; then
-    cp -f $SHARED_DIR/build-ca-cert.crt $BUILD_SOURCE/tmp/build-ca-cert.crt
-else
-    rm -f $BUILD_SOURCE/tmp/build-ca-cert.crt
-    touch $BUILD_SOURCE/tmp/build-ca-cert.crt
-fi
 
 time docker build --rm=false \
     --build-arg ARCH=$ARCH \

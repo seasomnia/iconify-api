@@ -7,7 +7,7 @@ import type { MemoryStorageConfig } from '../types/storage.js';
  */
 export const appConfig: AppConfig = {
 	// Index page
-	redirectIndex: 'https://iconify.design/docs/api/',
+	redirectIndex: '',
 
 	// Region to add to `/version` response
 	// Used to tell which server is responding when running multiple servers
