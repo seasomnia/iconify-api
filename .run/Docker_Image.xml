@@ -1,0 +1,35 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Docker Image" type="docker-deploy" factoryName="docker-image" server-name="Docker 141">
+    <deployment type="docker-image">
+      <settings>
+        <option name="imageTag" value="iconify/api:3.1.1" />
+        <option name="containerName" value="iconify-api" />
+        <option name="portBindings">
+          <list>
+            <DockerPortBindingImpl>
+              <option name="containerPort" value="3000" />
+              <option name="hostPort" value="8300" />
+            </DockerPortBindingImpl>
+          </list>
+        </option>
+        <option name="volumeBindings">
+          <list>
+            <DockerVolumeBindingImpl>
+              <option name="containerPath" value="/data/iconify-api/cache" />
+              <option name="hostPath" value="/home/admin/service/cache" />
+            </DockerVolumeBindingImpl>
+            <DockerVolumeBindingImpl>
+              <option name="containerPath" value="/data/iconify-api/src/config" />
+              <option name="hostPath" value="/home/admin/service/config" />
+            </DockerVolumeBindingImpl>
+            <DockerVolumeBindingImpl>
+              <option name="containerPath" value="/data/iconify-api/node_modules/@iconify/json" />
+              <option name="hostPath" value="/home/admin/service/icon-api/json/package" />
+            </DockerVolumeBindingImpl>
+          </list>
+        </option>
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>
